@@ -2,11 +2,19 @@ import { notFound } from "next/navigation";
 import { getImages } from "./utils/api";
 import Image from "next/image";
 import Pagination from './components/Pagination';
-import { imgObj } from "./type";
+import { PageProps } from "../../.next/types/app/layout";
+type HomeProps = { page?: string };
+type imgObj =  {
+  "id": string,
+  "author": string,
+  "width": number,
+  "height": number,
+  "url": string,
+  "download_url": string,
+}
 
-export default async function Home({ searchParams }: { searchParams: { page?: string } }) {
-  let {page} = await searchParams;
-  const pageNum = parseInt(page || "1", 10);
+export default async function Home({ searchParams } : { searchParams : HomeProps}) {
+  const pageNum = parseInt(searchParams?.page ?? "1");
   const images = await getImages(pageNum);
 
   if (!images || images.length === 0) {
