@@ -3,7 +3,7 @@ import { getImages } from "./utils/api";
 import Image from "next/image";
 import Pagination from './components/Pagination';
 import { PageProps } from "../../.next/types/app/layout";
-type HomeProps = { page?: string };
+type HomeProps = { page?: string } & PageProps;
 type imgObj =  {
   "id": string,
   "author": string,
